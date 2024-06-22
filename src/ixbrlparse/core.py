@@ -477,5 +477,5 @@ class IXBRL:
                 }
             )
         return ret
-# Return the list of dictionaries created for each value in the `values` list,
+# Return the list of dictionaries created for each value in the `values` list
     
