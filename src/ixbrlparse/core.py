@@ -409,25 +409,73 @@ class IXBRL:
                     f"segment:{i}": "{} {} {}".format(s.get("tag", ""), s.get("dimension"), s.get("value")).strip()
                     for i, s in enumerate(v.context.segments)
                 }
+
+# Check if the `context` of `v` is an instance of the `ixbrlContext` class 
+# and if the `context` contains any segments.
+                
+# If both conditions are met, create a new dictionary called `segments`.
+                
+# For each segment in the context, add an entry to the `segments` dictionary. 
+# The key for each entry will be a string that says "segment" followed by the 
+# segment's index number (starting from 0). The value for each entry will be 
+# a string that combines the `tag`, `dimension`, and `value` of the segment, with 
+# any extra spaces at the beginning or end removed.
+                
+# This process will be repeated for each segment in the context, building the 
+# `segments` dictionary with all relevant information.
+
             else:
                 segments = {"segment:0": ""}
 
+# If the `context` of `v` is not an instance of `ixbrlContext` or if there are no  
+# segments in the `context`, create a dictionary called `segments` with one entry  
+# where the key is `"segment:0"` and the value is an empty string.
+
             ret.append(
                 {
+# Add a new dictionary to the `ret` list with the following key-value pairs:
                     "schema": " ".join(self.namespaces.get(f"xmlns:{v.schema}", [v.schema])),
+# the key "schema" with the value being the schema of the iXBRL file, joined:
+# the schema is obtained from the `namespaces` dictionary using the schema of the
+# current value `v` as the key; the value is a list of namespaces, which is joined
+# into a single string using a space as the separator.
+
+# OR:
+
+# Create a key named "schema" and set its value to the namespace associated with 
+# v.schema. If the namespace is not found, use v.schema as the value. The namespace 
+# is joined into a single string if it's a list.
                     "name": v.name,
+# the key "name" with the value being the name of the element v
                     "value": v.value,
+# the key "value" with the value being the value of the element v
                     "unit": v.unit if hasattr(v, "unit") else None,
+# the key "unit" with the value being the unit of the element v if it exists;
                     "instant": str(v.context.instant)
                     if isinstance(v.context, ixbrlContext) and v.context.instant
                     else None,
+# the key "instant" with the value being the string representation of 
+# `v.context.instant` (i.e., the instant date of the element context) 
+# if `v.context` is an instance of `ixbrlContext` and `v.context.instant` is present; 
+# otherwise, it is set to None
                     "startdate": str(v.context.startdate)
                     if isinstance(v.context, ixbrlContext) and v.context.startdate
                     else None,
+# the key "startdate" with the value being the string representation of
+# `v.context.startdate` (i.e., the start date of the element context) if
+# `v.context` is an instance of `ixbrlContext` and `v.context.startdate` is present;
+# otherwise, it is set to None
                     "enddate": str(v.context.enddate)
                     if isinstance(v.context, ixbrlContext) and v.context.enddate
                     else None,
+# the key "enddate" with the value being the string representation of
+# `v.context.enddate` (i.e., the end date of the element context) if
+# `v.context` is an instance of `ixbrlContext` and `v.context.enddate` is present;
+# otherwise, it is set to None
                     **segments,
+# add all key-value pairs from the `segments` dictionary to the new dictionary
                 }
             )
         return ret
+# Return the list of dictionaries created for each value in the `values` list,
+    
