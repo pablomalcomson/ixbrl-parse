@@ -1,4 +1,5 @@
 from pathlib import Path
+import sys
 from typing import IO, Dict, Generator, Iterable, List, Optional, Union
 
 from bs4 import BeautifulSoup, Tag
@@ -395,6 +396,9 @@ class IXBRL:
             >>> df = pd.DataFrame.from_records(i.to_table(fields="numeric"))
             >>> df.head()
         """
+
+        print(f"fields: {fields}", file=sys.stderr)
+
         if fields == "nonnumeric":
             values = self.nonnumeric
         elif fields == "numeric":
@@ -402,8 +406,13 @@ class IXBRL:
         else:
             values = self.nonnumeric + self.numeric
 
+        # print(f"values: {values}", file=sys.stderr)
+
         ret = []
         for v in values:
+            # print "v: {v}" to stderr
+            print(f"v: {v}", file=sys.stderr)
+            
             if isinstance(v.context, ixbrlContext) and v.context.segments:
                 segments = {
                     f"segment:{i}": "{} {} {}".format(s.get("tag", ""), s.get("dimension"), s.get("value")).strip()

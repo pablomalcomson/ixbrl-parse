@@ -87,6 +87,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s:%(name
 def ixbrlparse_cli(output_format: str, fields: str, outfile, infile):
     x = IXBRL(infile)
 
+    print(f"x: {x}", file=sys.stderr)
+
 # `x = IXBRL(infile)`: Creates an instance of the `IXBRL` class with the input file.
 
     if output_format == "csv":
