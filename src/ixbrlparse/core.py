@@ -141,6 +141,7 @@ class IXBRLParser(BaseParser):
 
 # if yes, assign the stripped `schema` value to the instance attribute `schema`.
 
+        print(f"self.schema: {self.schema}", file=sys.stderr)
         self.namespaces = {}
 
 # set the instance attribute `namespaces` to an empty dictionary.
@@ -173,7 +174,7 @@ class IXBRLParser(BaseParser):
 
                         self.namespaces[k] = namespace_value.split(" ")
 
-                        # print(f"X: {self.namespaces}", file=sys.stderr)
+        print(f"self.namespaces: {self.namespaces}", file=sys.stderr)
 
 # if yes, split the `namespace_value` by spaces and store the resulting list in the `namespaces` dictionary with `k` as the key.
 
